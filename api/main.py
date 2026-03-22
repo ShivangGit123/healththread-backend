@@ -17,12 +17,16 @@ app = FastAPI(title="HealthThread API")
 # ── CORS — allows Vercel frontend to talk to this API ────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://healththread-frontend.vercel.app",
+        "https://healththread-frontend-shivanggit123.vercel.app",
+        "http://localhost:3000",
+        "*"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 engine = GraphRAGEngine()
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
