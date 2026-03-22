@@ -6,7 +6,10 @@ import pytesseract
 import io
 
 # Windows Tesseract path
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+import platform
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# On Linux (Railway) tesseract is in PATH automatically
 
 def parse_pdf(filepath: str) -> dict:
     result = {
