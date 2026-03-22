@@ -19,7 +19,6 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://healththread-frontend.vercel.app",
-        "https://healththread-frontend-shivanggit123.vercel.app",
         "http://localhost:3000",
         "*"
     ],
