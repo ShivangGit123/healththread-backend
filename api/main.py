@@ -70,13 +70,19 @@ async def upload_document(
     if not entities.get("dates"):
         entities["dates"] = ["unknown"]
 
+    # Use name from report if found, otherwise use entered name
+    actual_name = entities.get("patient_name", "").strip()
+    if not actual_name or len(actual_name) < 2:
+        actual_name = patient_name
+
     try:
-        build_graph_from_entities(entities, patient_name)
+        build_graph_from_entities(entities, actual_name)
     except Exception as e:
         return {"status": "error", "message": f"Graph build failed: {str(e)}"}
 
     return {
         "status": "success",
+        "patient_name": actual_name,
         "report_type": entities.get("report_type", "Unknown"),
         "date": entities.get("dates", ["unknown"])[0],
         "summary": {
